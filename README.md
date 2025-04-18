@@ -19,7 +19,7 @@ A basic pixel art editor built from scratch using HTML, CSS, and JavaScript. You
 ## Live Demo
 
 Try it on GitHub Pages:  
-[https://sudo-j182.github.io/simple-drawing-tool](https://sudo-j182.github.io/simple-drawing-tool)
+[https://sudo-j182.github.io/pixel-editor](https://sudo-j182.github.io/pixel-editor/)
 
 ## How It Was Built
 
