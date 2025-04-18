@@ -1,0 +1,153 @@
+/* ==========================================================================
+    RESET / BASE STYLES
+   ========================================================================== */
+   @font-face {
+    font-family: 'Press Start 2P';
+    src: url('PressStart2P-Regular.ttf') format('truetype');
+    font-display: swap;
+}
+
+body {
+    font-family: 'Press Start 2P', monospace;
+    background-color: rgb(29, 18, 245);
+    color: #0f0;
+}
+
+/* ==========================================================================
+    LAYOUT STRUCTURE
+   ========================================================================== */
+header {
+    text-align: center;
+    color: rgb(255, 238, 2);
+    background-color: cyan;
+    padding: 10px;
+    margin: 20px 10px 10px 10px;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+/* ==========================================================================
+    COMPONENTS
+   ========================================================================== */
+
+/* Header Text Styling */
+.header-title,
+.header-subtitle,
+.header-paragraph {
+    color: yellow;
+    text-shadow: 2px 0 black, -2px 0 black, 0 2px black, 0 -2px black,
+                 1px 1px black, -1px -1px black, 1px -1px black, -1px 1px black;
+}
+
+/* Dropdown Selector */
+.dropdown-container {
+    color: yellow;
+    text-align: left;
+    cursor: pointer;
+    text-shadow: 2px 0 black, -2px 0 black, 0 2px black, 0 -2px black,
+                 1px 1px black, -1px -1px black, 1px -1px black, -1px 1px black;
+}
+
+#grid-size {
+    color: yellow;
+    background-color: cyan;
+    border: 2px solid black;
+    cursor: pointer;
+    text-shadow: 2px 0 black, -2px 0 black, 0 2px black, 0 -2px black,
+                 1px 1px black, -1px -1px black, 1px -1px black, -1px 1px black;
+}
+
+/* Grid and Cells */
+.drawing-grid-container {
+    display: grid;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.grid-cell {
+    width: 20px;
+    height: 20px;
+    background-color: white;
+}
+
+/* Color Palette */
+.color-palette {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+    margin: 10px auto;
+    width: 350px;
+}
+
+.color-option {
+    width: 30px;
+    height: 30px;
+    border: 2px solid black;
+    cursor: pointer;
+}
+
+/* Buttons */
+#clear-grid,
+#toggle-line-mode,
+#toggle-grid,
+#save-art,
+#load-art,
+#export-art {
+    font-family: 'Press Start 2P';
+    background-color: cyan;
+    color: yellow;
+    border: 2px solid yellow;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    margin: 10px auto;
+    display: block;
+    text-shadow: 2px 0 black, -2px 0 black, 0 2px black, 0 -2px black,
+                 1px 1px black, -1px -1px black, 1px -1px black, -1px 1px black;
+}
+
+/* Footer */
+.footer-message1,
+.footer-message2,
+.footer-link {
+    color: yellow;
+    text-shadow: 2px 0 black, -2px 0 black, 0 2px black, 0 -2px black,
+                 1px 1px black, -1px -1px black, 1px -1px black, -1px 1px black;
+}
+
+/* ==========================================================================
+    UTILITIES / POSITIONING
+   ========================================================================== */
+.button-container {
+    position: absolute;
+    bottom: 100px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* ==========================================================================
+    RESPONSIVE DESIGN
+   ========================================================================== */
+@media (min-width: 768px) {
+    .button-container { right: 50px; }
+}
+@media (min-width: 1024px) {
+    .button-container { right: 100px; }
+}
+@media (min-width: 1440px) {
+    .button-container { right: 387px; }
+}
+@media (max-width: 767px) {
+    .button-container {
+        bottom: -37px;
+        right: -160px;
+    }
+}
