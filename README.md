@@ -17,9 +17,8 @@ A basic pixel art editor designed for drawing, erasing, and saving small pixel a
 
 ---
 
-## Challenge Requirements Coverage
 
-| Requirement                          | Status        |
+
 |---------------------------------------|---------------|
 | Pixel grid with adjustable size      | Implemented   |
 | Colour selection palette             | Implemented   |
