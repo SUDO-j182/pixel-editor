@@ -8,18 +8,19 @@ A basic pixel art editor built from scratch using HTML, CSS, and JavaScript. You
 - Colour selection palette
 - Click or drag to draw and erase
 - Works on desktop and mobile
+- Save/load artwork locally
+- Export as .png
 
 ## Planned Updates
 
-- Save/load artwork locally
-- Export as .png
 - Add shape tools and undo/redo
 - Optional favicon preview mode
+- Add zoom in/out feature for use with 32x and 64x grid
 
 ## Live Demo
 
 Try it on GitHub Pages:  
-[https://sudo-j182.github.io/simple-drawing-tool](https://sudo-j182.github.io/simple-drawing-tool)
+[https://sudo-j182.github.io/pixel-editor](https://sudo-j182.github.io/pixel-editor/)
 
 ## How It Was Built
 
