@@ -2,33 +2,32 @@
 // DOM SELECTIONS & GLOBALS
 // ====================
 
-const gridContainer = document.querySelector('.drawing-grid-container');
-const gridSizeSelector = document.getElementById("grid-size");
-const toggleLineButton = document.getElementById("toggle-line-mode");
-const clearGridButton = document.getElementById("clear-grid");
-const toggleGridButton = document.getElementById("toggle-grid");
-const saveArtButton = document.getElementById("save-art");
-const loadArtButton = document.getElementById("load-art");
-const exportArtButton = document.getElementById("export-art");
-const colorPalette = document.querySelector('.color-palette');
+const gridContainer=document.querySelector('.drawing-grid-container');
+const gridSizeSelector=document.getElementById("grid-size");
+const toggleLineButton=document.getElementById("toggle-line-mode");
+const clearGridButton=document.getElementById("clear-grid");
+const toggleGridButton=document.getElementById("toggle-grid");
+const saveArtButton=document.getElementById("save-art");
+const loadArtButton=document.getElementById("load-art");
+const exportArtButton=document.getElementById("export-art");
+const colorPalette=document.querySelector('.color-palette');
 
-const gridDimension = 320;
-let currentGridSize = 16;
-let currentColor = "#000000";
-let isMouseDown = false;
-let lineMode = false;
-let startCell = null;
-                      //STORES PREVIEW CELLS TEMPORARILY
-let previewCells = [];
+const gridDimension=320;
+let currentGridSize=16;
+let currentColor="#000000";
+let isMouseDown=false;
+let lineMode=false;
+let startCell=null;
+let previewCells=[]; //STORES PREVIEW CELLS TEMPORARILY
 
 // ====================
 // HELPER FUNCTIONS
 // ====================
 
-                         //CLEARS TEMPORARY LINE PREVIEW FROM GRID
+//CLEARS TEMPORARY LINE PREVIEW FROM GRID
 function clearPreview() {
-    previewCells.forEach(cell => {
-        if (cell.dataset.preview==='true') {
+    previewCells.forEach(cell=>{
+        if(cell.dataset.preview==='true'){
             cell.style.backgroundColor='';
             delete cell.dataset.preview;
         }
@@ -40,7 +39,7 @@ function clearPreview() {
 // MAIN FUNCTIONS
 // ====================
 
-                           //CREATES GRID BASED ON SELECTED GRID SIZE
+//CREATES GRID BASED ON SELECTED GRID SIZE
 function createGrid(size) {
     gridContainer.innerHTML="";
     const cellSize=gridDimension/size;
@@ -56,13 +55,17 @@ function createGrid(size) {
         cell.style.height=`${cellSize}px`;
         cell.style.border="1px solid black";
 
-                                                                     //HANDLES SINGLE CLICK COLORING OR LINE DRAWING
+        //HANDLES SINGLE CLICK COLORING OR LINE DRAWING
         cell.addEventListener("click",()=>handleCellClick(cell,size));
 
-                                               //HANDLES DRAG-TO-PAINT FUNCTIONALITY
+        //HANDLES DRAG-TO-PAINT FUNCTIONALITY AND LINE PREVIEW
         cell.addEventListener("mouseover",()=>{
-            if(isMouseDown&&currentColor!==null){
+            if(isMouseDown&&currentColor!==null&&!lineMode){
                 cell.style.backgroundColor=currentColor;
+            }
+            if(lineMode&&startCell&&cell!==startCell){
+                clearPreview();
+                previewLine(startCell,cell,currentGridSize);
             }
         });
 
@@ -70,22 +73,60 @@ function createGrid(size) {
     }
 }
 
-                                    //HANDLES CELL CLICK EVENTS (COLORING OR LINE MODE)
-function handleCellClick(cell,size){
+//HANDLES CELL CLICK EVENTS (COLORING OR LINE MODE)
+function handleCellClick(cell, size) {
     if(lineMode){
         if(!startCell){
-            startCell=cell;
+            startCell=cell; //STORE FIRST CLICKED CELL
         }else{
-            drawLine(startCell,cell,size);
-            startCell=null;
+            clearPreview(); //CLEAR PREVIEW WHEN LINE IS FINALIZED
+            drawLine(startCell,cell,size); //DRAW ACTUAL LINE
+            startCell=null; //RESET FOR NEXT LINE
         }
     }else{
         cell.style.backgroundColor=currentColor;
     }
 }
 
-                                      //DRAWS LINE BETWEEN TWO CELLS (INCLUDING DIAGONAL)
-function drawLine(start,end,gridSize){
+//PREVIEWS TEMPORARY LINE BETWEEN TWO CELLS
+function previewLine(start, end, gridSize) {
+    const gridCells=Array.from(document.querySelectorAll('.grid-cell'));
+    const startIndex=gridCells.indexOf(start);
+    const endIndex=gridCells.indexOf(end);
+
+    let x0=startIndex%gridSize;
+    let y0=Math.floor(startIndex/gridSize);
+    let x1=endIndex%gridSize;
+    let y1=Math.floor(endIndex/gridSize);
+
+    let dx=Math.abs(x1-x0);
+    let dy=Math.abs(y1-y0);
+    let sx=x0<x1?1:-1;
+    let sy=y0<y1?1:-1;
+    let err=dx-dy;
+
+    while(true){
+        const cell=gridCells[y0*gridSize+x0];
+        if(!cell.style.backgroundColor||cell.style.backgroundColor===""){
+            cell.style.backgroundColor=currentColor;
+            cell.dataset.preview="true";
+            previewCells.push(cell);
+        }
+        if(x0===x1&&y0===y1)break;
+        let e2=2*err;
+        if(e2>-dy){
+            err-=dy;
+            x0+=sx;
+        }
+        if(e2<dx){
+            err+=dx;
+            y0+=sy;
+        }
+    }
+}
+
+//DRAWS LINE BETWEEN TWO CELLS (INCLUDING DIAGONAL)
+function drawLine(start, end, gridSize) {
     const gridCells=Array.from(document.querySelectorAll('.grid-cell'));
     const startIndex=gridCells.indexOf(start);
     const endIndex=gridCells.indexOf(end);
@@ -120,7 +161,7 @@ function drawLine(start,end,gridSize){
 // COLOR PALETTE SETUP
 // ====================
 
-              //DEFINED TEMPLEOS-INSPIRED COLORS
+//DEFINED TEMPLEOS-INSPIRED COLORS
 const colors=[
     "#000000","#0000AA","#00AA00","#00AAAA",
     "#AA0000","#AA00AA","#AA5500","#AAAAAA",
@@ -128,9 +169,9 @@ const colors=[
     "#FF5555","#FF55FF","#FFFF55","#FFFFFF"
 ];
 
-                              //GENERATES COLOR PALETTE UI
-function createColorOptions(){
-                                                      //OPTION TO DESELECT CURRENT COLOR
+//GENERATES COLOR PALETTE UI
+function createColorOptions() {
+    //OPTION TO DESELECT CURRENT COLOR
     const clearSelection=document.createElement('div');
     clearSelection.classList.add('color-option');
     Object.assign(clearSelection.style,{
@@ -147,7 +188,7 @@ function createColorOptions(){
     clearSelection.addEventListener("click",()=>currentColor=null);
     colorPalette.appendChild(clearSelection);
 
-                           //GENERATE COLOR OPTIONS
+    //GENERATE COLOR OPTIONS
     colors.forEach(color=>{
         const option=document.createElement("div");
         option.classList.add("color-option");
@@ -210,12 +251,20 @@ gridSizeSelector.addEventListener("change",()=>{
 document.addEventListener("mousedown",()=>isMouseDown=true);
 document.addEventListener("mouseup",()=>isMouseDown=false);
 
+//ESCAPE KEY TO CANCEL PREVIEW LINE
+document.addEventListener('keydown',(e)=>{
+    if(e.key==="Escape"&&lineMode){
+        clearPreview();
+        startCell=null;
+    }
+});
+
 // ====================
 // INITIALIZE APPLICATION
 // ====================
- 
-                     //BUILD COLOUR PALETTE UI
-createColorOptions(); 
 
-                           //BUILD INITIAL GRID
+//BUILD COLOUR PALETTE UI
+createColorOptions();
+
+//BUILD INITIAL GRID
 createGrid(currentGridSize);
