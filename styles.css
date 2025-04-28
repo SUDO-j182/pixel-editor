@@ -1,5 +1,5 @@
-/* ==========================================================================
-    RESET / BASE STYLES
+/* ========================================================================== 
+    RESET / BASE STYLES 
    ========================================================================== */
    @font-face {
     font-family: 'Press Start 2P';
@@ -9,21 +9,22 @@
 
 body {
     font-family: 'Press Start 2P', monospace;
-    background-color: rgb(29, 18, 245);
-    color: #0f0;
+    background-color: darkcyan;
+    color: yellow;
 }
 
-/* ==========================================================================
-    LAYOUT STRUCTURE
+/* ========================================================================== 
+    LAYOUT STRUCTURE 
    ========================================================================== */
 header {
     text-align: center;
-    color: rgb(255, 238, 2);
-    background-color: cyan;
+    color: yellow;
+    background-color: #004f4f;
     padding: 10px;
     margin: 20px 10px 10px 10px;
 }
 
+/* Main layout stays the same */
 main {
     display: flex;
     flex-direction: column;
@@ -31,8 +32,8 @@ main {
     gap: 20px;
 }
 
-/* ==========================================================================
-    COMPONENTS
+/* ========================================================================== 
+    COMPONENTS 
    ========================================================================== */
 
 /* Header Text Styling */
@@ -55,8 +56,8 @@ main {
 
 #grid-size {
     color: yellow;
-    background-color: cyan;
-    border: 2px solid black;
+    background-color: #004f4f;
+    border: 2px solid yellow;
     cursor: pointer;
     text-shadow: 2px 0 black, -2px 0 black, 0 2px black, 0 -2px black,
                  1px 1px black, -1px -1px black, 1px -1px black, -1px 1px black;
@@ -73,6 +74,7 @@ main {
     width: 20px;
     height: 20px;
     background-color: white;
+    border: 1px solid red;
 }
 
 /* Color Palette */
@@ -99,17 +101,26 @@ main {
 #save-art,
 #load-art,
 #export-art {
-    font-family: 'Press Start 2P';
-    background-color: cyan;
-    color: yellow;
-    border: 2px solid yellow;
+    font-family: 'Press Start 2P', monospace;
+    background-color: yellow;
+    color: darkcyan;
+    border: none;
     padding: 10px;
     text-align: center;
     cursor: pointer;
     margin: 10px auto;
     display: block;
-    text-shadow: 2px 0 black, -2px 0 black, 0 2px black, 0 -2px black,
-                 1px 1px black, -1px -1px black, 1px -1px black, -1px 1px black;
+    transition: background-color 0.3s ease;
+}
+
+/* Button Hover Effect */
+#clear-grid:hover,
+#toggle-line-mode:hover,
+#toggle-grid:hover,
+#save-art:hover,
+#load-art:hover,
+#export-art:hover {
+    background-color: #ffe100;
 }
 
 /* Footer */
@@ -121,8 +132,8 @@ main {
                  1px 1px black, -1px -1px black, 1px -1px black, -1px 1px black;
 }
 
-/* ==========================================================================
-    UTILITIES / POSITIONING
+/* ========================================================================== 
+    UTILITIES / POSITIONING 
    ========================================================================== */
 .button-container {
     position: absolute;
@@ -133,8 +144,8 @@ main {
     gap: 10px;
 }
 
-/* ==========================================================================
-    RESPONSIVE DESIGN
+/* ========================================================================== 
+    RESPONSIVE DESIGN 
    ========================================================================== */
 @media (min-width: 768px) {
     .button-container { right: 50px; }
@@ -151,3 +162,4 @@ main {
         right: -160px;
     }
 }
+
