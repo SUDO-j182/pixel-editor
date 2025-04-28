@@ -1,27 +1,92 @@
-# Simple Drawing Tool (Pixel Editor)
+# Pixel Editor
 
-A basic pixel art editor built from scratch using HTML, CSS, and JavaScript. You can draw, erase, and choose colours using a 16-colour palette. Built to practice DOM manipulation, event handling, and interactive UI design.
+A basic pixel art editor designed for drawing, erasing, and saving small pixel artworks. This project was developed to practice DOM manipulation, event handling, and interactive UI design.
 
-## Features
+---
 
-- Pixel grid with adjustable size
-- Colour selection palette
-- Click or drag to draw and erase
-- Works on desktop and mobile
-- Save/load artwork locally
-- Export as .png
+**Status:** IN DEVELOPMENT  
+**Last Updated:** 
 
-## Planned Updates
+---
 
-- Add shape tools and undo/redo
-- Optional favicon preview mode
-- Add zoom in/out feature for use with 32x and 64x grid
+## Tech Stack
 
-## Live Demo
+- Frontend: HTML, CSS, JavaScript (Vanilla)
+- Backend: None (Frontend-only application)
+- Database: LocalStorage (for save/load feature)
 
-Try it on GitHub Pages:  
-[https://sudo-j182.github.io/pixel-editor](https://sudo-j182.github.io/pixel-editor/)
+---
 
-## How It Was Built
+## Challenge Requirements Coverage
 
-Created to better understand how to build interactive tools using JavaScript and CSS layout logic. Every feature was added one at a time, focusing on usability and learning through building.
+| Requirement                          | Status        |
+|---------------------------------------|---------------|
+| Pixel grid with adjustable size      | Implemented   |
+| Colour selection palette             | Implemented   |
+| Click or drag to draw and erase       | Implemented   |
+| Save/load artwork locally             | Implemented   |
+| Export pixel art as `.png`            | Implemented   |
+| Mobile and desktop compatibility     | Implemented   |
+| README documentation                 | Included      |
+
+---
+
+## Frontend Overview
+
+### HTML
+- Semantic structure with canvas grid and colour palette
+- Buttons for saving, loading, clearing, and exporting artwork
+- Supports accessibility where practical for a lightweight app
+
+### CSS
+- Custom palette based on a 16-colour retro theme
+- Responsive layout supporting both mobile and desktop
+- Styled buttons, palette swatches, and pixel grid cells
+
+### JavaScript
+- Handles drawing, erasing, and drag-to-paint functionality
+- Allows saving and loading artwork via `localStorage`
+- Enables exporting artwork as a downloadable `.png`
+- Supports adjustable grid size (future zoom feature planned)
+
+---
+
+## Backend Overview
+
+### REST API Endpoints
+
+N/A — Frontend-only project using browser storage (`localStorage`).
+
+---
+
+## Testing Summary (as of )
+
+All core features have been manually tested:
+
+- Pixel drawing and erasing verified on desktop and mobile
+- Save and Load functionality confirmed via `localStorage`
+- Exported `.png` file downloads successfully
+- Palette colour selection and drag-to-paint tested
+
+---
+
+## Unit Testing Summary (as of )
+
+_No formal unit tests yet implemented. Manual testing used for current version._
+
+---
+
+## Planned Features
+
+- Add shape tools (line, rectangle, circle)
+- Add undo/redo functionality
+- Add optional favicon preview mode
+- Add zoom in/out support for larger grids (32x32, 64x64)
+
+---
+
+## Additional Notes
+
+- Designed with simplicity and speed in mind
+- Focuses on practicing DOM manipulation without frameworks
+
