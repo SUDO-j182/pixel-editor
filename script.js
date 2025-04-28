@@ -19,6 +19,7 @@ let isMouseDown=false;
 let lineMode=false;
 let startCell=null;
 let previewCells=[]; //STORES PREVIEW CELLS TEMPORARILY
+let zoomLevel=1;
 
 // ====================
 // HELPER FUNCTIONS
@@ -35,6 +36,35 @@ function clearPreview() {
     previewCells=[];
 }
 
+//ZOOMS IN BY INCREASING CELL SIZE
+function zoomIn() {
+    if(zoomLevel<3){
+        zoomLevel+=0.25;
+        resizeGridCells();
+    }
+}
+
+//ZOOMS OUT BY DECREASING CELL SIZE
+function zoomOut() {
+    if(zoomLevel>0.5){
+        zoomLevel-=0.25;
+        resizeGridCells();
+    }
+}
+
+//RESIZES ALL GRID CELLS BASED ON CURRENT ZOOM
+function resizeGridCells() {
+    const gridCells=document.querySelectorAll('.grid-cell');
+    const baseSize=gridDimension/currentGridSize;
+    gridCells.forEach(cell=>{
+        cell.style.width=`${baseSize*zoomLevel}px`;
+        cell.style.height=`${baseSize*zoomLevel}px`;
+    });
+
+    gridContainer.style.gridTemplateColumns=`repeat(${currentGridSize},${baseSize*zoomLevel}px)`;
+    gridContainer.style.gridTemplateRows=`repeat(${currentGridSize},${baseSize*zoomLevel}px)`;
+}
+
 // ====================
 // MAIN FUNCTIONS
 // ====================
@@ -42,23 +72,23 @@ function clearPreview() {
 //CREATES GRID BASED ON SELECTED GRID SIZE
 function createGrid(size) {
     gridContainer.innerHTML="";
-    const cellSize=gridDimension/size;
+    const baseSize=gridDimension/size;
 
     gridContainer.style.display="grid";
-    gridContainer.style.gridTemplateColumns=`repeat(${size},${cellSize}px)`;
-    gridContainer.style.gridTemplateRows=`repeat(${size},${cellSize}px)`;
+    gridContainer.style.gridTemplateColumns=`repeat(${size},${baseSize*zoomLevel}px)`;
+    gridContainer.style.gridTemplateRows=`repeat(${size},${baseSize*zoomLevel}px)`;
 
     for(let i=0;i<size*size;i++){
         const cell=document.createElement("div");
         cell.classList.add("grid-cell");
-        cell.style.width=`${cellSize}px`;
-        cell.style.height=`${cellSize}px`;
+        cell.style.width=`${baseSize*zoomLevel}px`;
+        cell.style.height=`${baseSize*zoomLevel}px`;
         cell.style.border="1px solid black";
 
-        //HANDLES SINGLE CLICK COLORING OR LINE DRAWING
+                                                             //HANDLES SINGLE CLICK COLORING OR LINE DRAWING
         cell.addEventListener("click",()=>handleCellClick(cell,size));
 
-        //HANDLES DRAG-TO-PAINT FUNCTIONALITY AND LINE PREVIEW
+                                               //HANDLES DRAG-TO-PAINT FUNCTIONALITY AND LINE PREVIEW
         cell.addEventListener("mouseover",()=>{
             if(isMouseDown&&currentColor!==null&&!lineMode){
                 cell.style.backgroundColor=currentColor;
@@ -171,7 +201,7 @@ const colors=[
 
 //GENERATES COLOR PALETTE UI
 function createColorOptions() {
-    //OPTION TO DESELECT CURRENT COLOR
+                                                     //OPTION TO DESELECT CURRENT COLOR
     const clearSelection=document.createElement('div');
     clearSelection.classList.add('color-option');
     Object.assign(clearSelection.style,{
@@ -188,7 +218,7 @@ function createColorOptions() {
     clearSelection.addEventListener("click",()=>currentColor=null);
     colorPalette.appendChild(clearSelection);
 
-    //GENERATE COLOR OPTIONS
+                           //GENERATE COLOR OPTIONS
     colors.forEach(color=>{
         const option=document.createElement("div");
         option.classList.add("color-option");
@@ -250,6 +280,9 @@ gridSizeSelector.addEventListener("change",()=>{
 
 document.addEventListener("mousedown",()=>isMouseDown=true);
 document.addEventListener("mouseup",()=>isMouseDown=false);
+
+document.getElementById("zoom-in").addEventListener("click",zoomIn);
+document.getElementById("zoom-out").addEventListener("click",zoomOut);
 
 //ESCAPE KEY TO CANCEL PREVIEW LINE
 document.addEventListener('keydown',(e)=>{

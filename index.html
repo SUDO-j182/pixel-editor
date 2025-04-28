@@ -1,24 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
+     <!--HEAD AND METADATA-->
 <head>
-    <!-- Character encoding and viewport for responsive layout -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pixel Art Program</title>
-
-    <!-- External styles and scripts -->
     <link rel="stylesheet" href="styles.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script defer src="script.js"></script>
-
-    <!-- Favicon -->
    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-
 </head>
 
 <body>
-
-    <!-- Header: Title, subtitle, and intro text -->
+                                 <!--HEADER START -->
     <header class="header-border">
         <div class="header-container">
             <div class="header-title">
@@ -31,35 +26,39 @@
                 <p>I wrote this program in order to create my own icons and pixel art for future projects.</p>
             </div>
         </div>
+
+            <!--HEADER END-->
     </header>
 
+         <!--MAIN START-->
     <main>
 
-        <!-- Color Palette: Populated dynamically via JavaScript -->
+                                                                 <!--COLOUR PALETTE/DYNAMIC JS -->
         <section class="color-palette" aria-label="Color Palette">
-            <!-- Colors will be inserted here by script.js -->
         </section>
 
-        <!-- Tool Buttons: Toggle line mode, clear, and show/hide grid -->
+                                      <!--TOOLS-->
         <section class="tool-controls">
+            <button id="zoom-in" aria-label="Zoom In">Zoom In</button>
+            <button id="zoom-out" aria-label="Zoom Out">Zoom Out</button>
             <button id="toggle-line-mode" aria-label="Toggle Line Drawing Mode">Line Mode: OFF</button>
             <button id="clear-grid" aria-label="Clear the Drawing Grid">Clear Grid</button>
             <button id="toggle-grid" aria-label="Toggle Grid Borders">Toggle Grid</button>
         </section>
 
-        <!-- Drawing Grid Area -->
+                                        <!--GRID-->
         <section class="drawing-section">
             <div class="drawing-grid-container" aria-label="Drawing Canvas Grid"></div>
         </section>
 
-        <!-- Save, Load, and Export Controls -->
+                                                                              <!--BUTTONS-->
         <section class="button-container" aria-label="Save and Export Options">
             <button id="save-art" class="action-button" aria-label="Save Your Art">Save Art</button>
             <button id="load-art" class="action-button" aria-label="Load Saved Art">Load Art</button>
             <button id="export-art" class="action-button" aria-label="Export Drawing as PNG">Export as PNG</button>
         </section>
 
-        <!-- Grid Size Selector -->
+                                           <!--GRID SIZE SELECTOR-->
         <section class="dropdown-container">
             <label for="grid-size">Grid Size:</label>
             <select id="grid-size" aria-label="Select Grid Size">
@@ -69,7 +68,9 @@
             </select>
         </section>
 
-        <!-- Footer: Favicon info -->
+              <!--MAIN END-->
+        </main>
+                              <!--FOOTER START -->
         <footer class="footer">
             <p class="footer-message1">
                 Browsers do not support ICO creation, but you can download a PNG file and convert it yourself.
@@ -78,6 +79,7 @@
                 Use websites like 
                 <a href="https://favicon.io/" target="_blank" rel="noopener noreferrer" class="footer-link">favicon.io</a>
             </p>
+                <!--FOOTER END-->
         </footer>
 
     </main>
