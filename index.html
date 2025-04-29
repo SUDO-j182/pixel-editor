@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-     <!--HEAD AND METADATA-->
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,11 +8,10 @@
     <link rel="stylesheet" href="styles.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script defer src="script.js"></script>
-   <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 </head>
 
 <body>
-                                 <!--HEADER START -->
     <header class="header-border">
         <div class="header-container">
             <div class="header-title">
@@ -26,65 +24,56 @@
                 <p>I wrote this program in order to create my own icons and pixel art for future projects.</p>
             </div>
         </div>
-
-            <!--HEADER END-->
     </header>
 
-         <!--MAIN START-->
     <main>
+        <!--SIDEBAR-->
+        <aside class="sidebar" aria-label="Tool Sidebar">
+            <section class="tool-controls">
+                <button id="zoom-in" aria-label="Zoom In">Zoom In</button>
+                <button id="zoom-out" aria-label="Zoom Out">Zoom Out</button>
+                <button id="toggle-line-mode" aria-label="Toggle Line Drawing Mode">Line Mode: OFF</button>
+                <button id="clear-grid" aria-label="Clear the Drawing Grid">Clear Grid</button>
+                <button id="toggle-grid" aria-label="Toggle Grid Borders">Toggle Grid</button>
+            </section>
 
-                                                                 <!--COLOUR PALETTE/DYNAMIC JS -->
-        <section class="color-palette" aria-label="Color Palette">
-        </section>
+            <section class="button-container" aria-label="Save and Export Options">
+                <button id="save-art" class="action-button" aria-label="Save Your Art">Save Art</button>
+                <button id="load-art" class="action-button" aria-label="Load Saved Art">Load Art</button>
+                <button id="export-art" class="action-button" aria-label="Export Drawing as PNG">Export as PNG</button>
+            </section>
 
-                                      <!--TOOLS-->
-        <section class="tool-controls">
-            <button id="zoom-in" aria-label="Zoom In">Zoom In</button>
-            <button id="zoom-out" aria-label="Zoom Out">Zoom Out</button>
-            <button id="toggle-line-mode" aria-label="Toggle Line Drawing Mode">Line Mode: OFF</button>
-            <button id="clear-grid" aria-label="Clear the Drawing Grid">Clear Grid</button>
-            <button id="toggle-grid" aria-label="Toggle Grid Borders">Toggle Grid</button>
-        </section>
+            <section class="dropdown-container">
+                <label for="grid-size">Grid Size:</label>
+                <select id="grid-size" aria-label="Select Grid Size">
+                    <option value="16" selected>16x16</option>
+                    <option value="32">32x32</option>
+                    <option value="64">64x64</option>
+                </select>
+            </section>
+        </aside>
 
-                                        <!--GRID-->
-        <section class="drawing-section">
-            <div class="drawing-grid-container" aria-label="Drawing Canvas Grid"></div>
-        </section>
+        <!--EDITOR AREA-->
+        <div class="editor-area">
+            <section class="color-palette" aria-label="Color Palette"></section>
 
-                                                                              <!--BUTTONS-->
-        <section class="button-container" aria-label="Save and Export Options">
-            <button id="save-art" class="action-button" aria-label="Save Your Art">Save Art</button>
-            <button id="load-art" class="action-button" aria-label="Load Saved Art">Load Art</button>
-            <button id="export-art" class="action-button" aria-label="Export Drawing as PNG">Export as PNG</button>
-        </section>
-
-                                           <!--GRID SIZE SELECTOR-->
-        <section class="dropdown-container">
-            <label for="grid-size">Grid Size:</label>
-            <select id="grid-size" aria-label="Select Grid Size">
-                <option value="16" selected>16x16</option>
-                <option value="32">32x32</option>
-                <option value="64">64x64</option>
-            </select>
-        </section>
-
-              <!--MAIN END-->
-        </main>
-                              <!--FOOTER START -->
-        <footer class="footer">
-            <p class="footer-message1">
-                Browsers do not support ICO creation, but you can download a PNG file and convert it yourself.
-            </p>
-            <p class="footer-message2">
-                Use websites like 
-                <a href="https://favicon.io/" target="_blank" rel="noopener noreferrer" class="footer-link">favicon.io</a>
-            </p>
-                <!--FOOTER END-->
-        </footer>
-
+            <section class="drawing-section">
+                <div class="drawing-grid-container" aria-label="Drawing Canvas Grid"></div>
+            </section>
+        </div>
     </main>
 
+    <footer class="footer">
+        <p class="footer-message1">
+            Browsers do not support ICO creation, but you can download a PNG file and convert it yourself.
+        </p>
+        <p class="footer-message2">
+            Use websites like 
+            <a href="https://favicon.io/" target="_blank" rel="noopener noreferrer" class="footer-link">favicon.io</a>
+        </p>
+    </footer>
 </body>
 </html>
+
 
 

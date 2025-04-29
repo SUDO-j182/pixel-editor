@@ -1,167 +1,150 @@
-/* ========================================================================== 
-    RESET / BASE STYLES 
-   ========================================================================== */
- @font-face {
-  font-family: 'Press Start 2P';
-  src: url('assets/fonts/PressStart2P-Regular.ttf') format('truetype');
-  font-display: swap;
-}
-
-
-
-body {
-    font-family: 'Press Start 2P', monospace;
-    background-color: darkcyan;
-    color: yellow;
-}
-
-/* ========================================================================== 
-    LAYOUT STRUCTURE 
-   ========================================================================== */
-header {
-    text-align: center;
-    color: yellow;
-    background-color: #004f4f;
-    padding: 10px;
-    margin: 20px 10px 10px 10px;
-}
-
-/* Main layout stays the same */
-main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-}
-
-/* ========================================================================== 
-    COMPONENTS 
-   ========================================================================== */
-
-/* Header Text Styling */
-.header-title,
-.header-subtitle,
-.header-paragraph {
-    color: yellow;
-    text-shadow: 2px 0 black, -2px 0 black, 0 2px black, 0 -2px black,
-                 1px 1px black, -1px -1px black, 1px -1px black, -1px 1px black;
-}
-
-/* Dropdown Selector */
-.dropdown-container {
-    color: yellow;
-    text-align: left;
-    cursor: pointer;
-    text-shadow: 2px 0 black, -2px 0 black, 0 2px black, 0 -2px black,
-                 1px 1px black, -1px -1px black, 1px -1px black, -1px 1px black;
-}
-
-#grid-size {
-    color: yellow;
-    background-color: #004f4f;
-    border: 2px solid yellow;
-    cursor: pointer;
-    text-shadow: 2px 0 black, -2px 0 black, 0 2px black, 0 -2px black,
-                 1px 1px black, -1px -1px black, 1px -1px black, -1px 1px black;
-}
-
-/* Grid and Cells */
-.drawing-grid-container {
-    display: grid;
-    justify-content: center;
-    margin: 0 auto;
-}
-
-.grid-cell {
-    width: 20px;
-    height: 20px;
-    background-color: white;
-    border: 1px solid red;
-}
-
-/* Color Palette */
-.color-palette {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 5px;
-    margin: 10px auto;
-    width: 350px;
-}
-
-.color-option {
-    width: 30px;
-    height: 30px;
-    border: 2px solid black;
-    cursor: pointer;
-}
-
-/* Buttons */
-#clear-grid,
-#toggle-line-mode,
-#toggle-grid,
-#save-art,
-#load-art,
-#export-art {
-    font-family: 'Press Start 2P', monospace;
-    background-color: yellow;
-    color: darkcyan;
-    border: none;
-    padding: 10px;
-    text-align: center;
-    cursor: pointer;
-    margin: 10px auto;
-    display: block;
-    transition: background-color 0.3s ease;
-}
-
-/* Button Hover Effect */
-#clear-grid:hover,
-#toggle-line-mode:hover,
-#toggle-grid:hover,
-#save-art:hover,
-#load-art:hover,
-#export-art:hover {
-    background-color: #ffe100;
-}
-
-/* Footer */
-.footer-message1,
-.footer-message2,
-.footer-link {
-    color: yellow;
-    text-shadow: 2px 0 black, -2px 0 black, 0 2px black, 0 -2px black,
-                 1px 1px black, -1px -1px black, 1px -1px black, -1px 1px black;
-}
-
-/* ========================================================================== 
-    UTILITIES / POSITIONING 
-   ========================================================================== */
-.button-container {
-    position: absolute;
-    bottom: 100px;
-    right: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-/* ========================================================================== 
-    RESPONSIVE DESIGN 
-   ========================================================================== */
-@media (min-width: 768px) {
-    .button-container { right: 50px; }
-}
-@media (min-width: 1024px) {
-    .button-container { right: 100px; }
-}
-@media (min-width: 1440px) {
-    .button-container { right: 387px; }
-}
-@media (max-width: 767px) {
-    .button-container {
-        bottom: -37px;
-        right: -160px;
-    }
-}
-
+@font-face {
+    font-family: 'Press Start 2P';
+    src: url('assets/fonts/PressStart2P-Regular.ttf') format('truetype');
+    font-display: swap;
+  }
+  
+  body {
+      font-family: 'Press Start 2P', monospace;
+      background-color: darkcyan;
+      color: yellow;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+  }
+  
+  main {
+      display: flex;
+      flex-grow: 1;
+      align-items: flex-start;
+  }
+  
+  /* Sidebar Layout */
+  .sidebar {
+      width: 250px;
+      padding: 20px;
+      background-color: #004f4f;
+      color: yellow;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      font-family: 'Press Start 2P', monospace;
+  }
+  
+  /* Editor content: palette + grid */
+  .editor-area {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      margin-left: 20px;
+  }
+  
+  /* Header */
+  header {
+      text-align: center;
+      color: yellow;
+      background-color: #004f4f;
+      padding: 10px;
+      margin: 20px 10px 10px 10px;
+  }
+  
+  .header-title,
+  .header-subtitle,
+  .header-paragraph {
+      color: yellow;
+      text-shadow: 2px 0 black, -2px 0 black, 0 2px black, 0 -2px black,
+                   1px 1px black, -1px -1px black, 1px -1px black, -1px 1px black;
+  }
+  
+  /* Grid and Cells */
+  .drawing-grid-container {
+      display: grid;
+      justify-content: center;
+      margin: 0 auto;
+  }
+  
+  .grid-cell {
+      width: 20px;
+      height: 20px;
+      background-color: white;
+      border: 1px solid red;
+  }
+  
+  /* Color Palette */
+  .color-palette {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 5px;
+      margin: 10px auto;
+      width: 350px;
+  }
+  
+  .color-option {
+      width: 30px;
+      height: 30px;
+      border: 2px solid black;
+      cursor: pointer;
+  }
+  
+  /* Buttons */
+  #clear-grid,
+  #toggle-line-mode,
+  #toggle-grid,
+  #save-art,
+  #load-art,
+  #export-art {
+      font-family: 'Press Start 2P', monospace;
+      background-color: yellow;
+      color: darkcyan;
+      border: none;
+      padding: 10px;
+      text-align: center;
+      cursor: pointer;
+      margin: 10px auto;
+      display: block;
+      transition: background-color 0.3s ease;
+  }
+  
+  #clear-grid:hover,
+  #toggle-line-mode:hover,
+  #toggle-grid:hover,
+  #save-art:hover,
+  #load-art:hover,
+  #export-art:hover {
+      background-color: #ffe100;
+  }
+  
+  /* Dropdown Selector */
+  .dropdown-container {
+      color: yellow;
+      text-align: left;
+      cursor: pointer;
+      text-shadow: 2px 0 black, -2px 0 black, 0 2px black, 0 -2px black,
+                   1px 1px black, -1px -1px black, 1px -1px black, -1px 1px black;
+  }
+  
+  #grid-size {
+      color: yellow;
+      background-color: #004f4f;
+      border: 2px solid yellow;
+      cursor: pointer;
+      text-shadow: 2px 0 black, -2px 0 black, 0 2px black, 0 -2px black,
+                   1px 1px black, -1px -1px black, 1px -1px black, -1px 1px black;
+  }
+  
+  .button-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+  }
+  
+  /* Footer */
+  .footer-message1,
+  .footer-message2,
+  .footer-link {
+      color: yellow;
+      text-shadow: 2px 0 black, -2px 0 black, 0 2px black, 0 -2px black,
+                   1px 1px black, -1px -1px black, 1px -1px black, -1px 1px black;
+  }
+  
