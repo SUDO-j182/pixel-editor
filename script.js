@@ -95,7 +95,7 @@ function createGrid(size) {
 
                                                //HANDLES DRAG-TO-PAINT FUNCTIONALITY AND LINE PREVIEW
         cell.addEventListener("mouseover",()=>{
-            if (isMouseDown && ditherMode) {
+            if (isMouseDown && ditherMode && !lineMode) {
                 const colorToApply = Math.random() < 0.5 ? primaryColor : secondaryColor;
                 cell.style.backgroundColor = colorToApply;
                 return;
@@ -116,7 +116,7 @@ function createGrid(size) {
 
 //HANDLES CELL CLICK EVENTS (COLORING OR LINE MODE)
 function handleCellClick(cell, size) {
-    if (ditherMode) {
+    if (ditherMode && !lineMode) {
         const colorToApply = Math.random() <0.5 ? primaryColor : secondaryColor;
         cell.style.backgroundColor = colorToApply;
         return;
@@ -137,72 +137,83 @@ function handleCellClick(cell, size) {
 
 //PREVIEWS TEMPORARY LINE BETWEEN TWO CELLS
 function previewLine(start, end, gridSize) {
-    const gridCells=Array.from(document.querySelectorAll('.grid-cell'));
-    const startIndex=gridCells.indexOf(start);
-    const endIndex=gridCells.indexOf(end);
+    const gridCells = Array.from(document.querySelectorAll('.grid-cell'));
+    const startIndex = gridCells.indexOf(start);
+    const endIndex = gridCells.indexOf(end);
 
-    let x0=startIndex%gridSize;
-    let y0=Math.floor(startIndex/gridSize);
-    let x1=endIndex%gridSize;
-    let y1=Math.floor(endIndex/gridSize);
+    let x0 = startIndex % gridSize;
+    let y0 = Math.floor(startIndex / gridSize);
+    let x1 = endIndex % gridSize;
+    let y1 = Math.floor(endIndex / gridSize);
 
-    let dx=Math.abs(x1-x0);
-    let dy=Math.abs(y1-y0);
-    let sx=x0<x1?1:-1;
-    let sy=y0<y1?1:-1;
-    let err=dx-dy;
+    let dx = Math.abs(x1 - x0);
+    let dy = Math.abs(y1 - y0);
+    let sx = x0 < x1 ? 1 : -1;
+    let sy = y0 < y1 ? 1 : -1;
+    let err = dx - dy;
 
-    while(true){
-        const cell=gridCells[y0*gridSize+x0];
-        if(!cell.style.backgroundColor||cell.style.backgroundColor===""){
-            cell.style.backgroundColor=currentColor;
-            cell.dataset.preview="true";
+    while (true) {
+        const index = y0 * gridSize + x0;
+        const cell = gridCells[index];
+        if (!cell.style.backgroundColor || cell.style.backgroundColor === "") {
+            cell.style.backgroundColor = ditherMode
+                ? (Math.random() < 0.5 ? primaryColor : secondaryColor)
+                : currentColor;
+            cell.dataset.preview = "true";
             previewCells.push(cell);
         }
-        if(x0===x1&&y0===y1)break;
-        let e2=2*err;
-        if(e2>-dy){
-            err-=dy;
-            x0+=sx;
+
+        if (x0 === x1 && y0 === y1) break;
+        let e2 = 2 * err;
+        if (e2 > -dy) {
+            err -= dy;
+            x0 += sx;
         }
-        if(e2<dx){
-            err+=dx;
-            y0+=sy;
+        if (e2 < dx) {
+            err += dx;
+            y0 += sy;
         }
     }
 }
+
 
 //DRAWS LINE BETWEEN TWO CELLS (INCLUDING DIAGONAL)
 function drawLine(start, end, gridSize) {
-    const gridCells=Array.from(document.querySelectorAll('.grid-cell'));
-    const startIndex=gridCells.indexOf(start);
-    const endIndex=gridCells.indexOf(end);
+    const gridCells = Array.from(document.querySelectorAll('.grid-cell'));
+    const startIndex = gridCells.indexOf(start);
+    const endIndex = gridCells.indexOf(end);
 
-    let x0=startIndex%gridSize;
-    let y0=Math.floor(startIndex/gridSize);
-    let x1=endIndex%gridSize;
-    let y1=Math.floor(endIndex/gridSize);
+    let x0 = startIndex % gridSize;
+    let y0 = Math.floor(startIndex / gridSize);
+    let x1 = endIndex % gridSize;
+    let y1 = Math.floor(endIndex / gridSize);
 
-    let dx=Math.abs(x1-x0);
-    let dy=Math.abs(y1-y0);
-    let sx=x0<x1?1:-1;
-    let sy=y0<y1?1:-1;
-    let err=dx-dy;
+    let dx = Math.abs(x1 - x0);
+    let dy = Math.abs(y1 - y0);
+    let sx = x0 < x1 ? 1 : -1;
+    let sy = y0 < y1 ? 1 : -1;
+    let err = dx - dy;
 
-    while(true){
-        gridCells[y0*gridSize+x0].style.backgroundColor=currentColor;
-        if(x0===x1&&y0===y1)break;
-        let e2=2*err;
-        if(e2>-dy){
-            err-=dy;
-            x0+=sx;
+    while (true) {
+        const index = y0 * gridSize + x0;
+        const cell = gridCells[index];
+        cell.style.backgroundColor = ditherMode
+            ? (Math.random() < 0.5 ? primaryColor : secondaryColor)
+            : currentColor;
+
+        if (x0 === x1 && y0 === y1) break;
+        let e2 = 2 * err;
+        if (e2 > -dy) {
+            err -= dy;
+            x0 += sx;
         }
-        if(e2<dx){
-            err+=dx;
-            y0+=sy;
+        if (e2 < dx) {
+            err += dx;
+            y0 += sy;
         }
     }
 }
+
 
 // ====================
 // COLOR PALETTE SETUP
