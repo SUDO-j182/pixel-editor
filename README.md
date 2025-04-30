@@ -5,7 +5,7 @@ A basic pixel art editor designed for drawing, erasing, and saving small pixel a
 ---
 
 **Status:** IN DEVELOPMENT  
-**Last Updated:** 
+**Last Updated:** 30/04/2025
 
 ---
 
@@ -58,7 +58,7 @@ N/A — Frontend-only project using browser storage (`localStorage`).
 
 ---
 
-## Testing Summary (as of )
+## Testing Summary (as of 30/04/2025 )
 
 All core features have been manually tested:
 
@@ -77,10 +77,9 @@ _No formal unit tests yet implemented. Manual testing used for current version._
 
 ## Planned Features
 
-- Add shape tools (line, rectangle, circle)
+- Add shape tools (rectangle, circle)
 - Add undo/redo functionality
 - Add optional favicon preview mode
-- Add zoom in/out support for larger grids (32x32, 64x64)
 
 ---
 
