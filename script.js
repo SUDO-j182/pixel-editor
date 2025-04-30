@@ -21,6 +21,11 @@ let startCell=null;
 let previewCells=[]; //STORES PREVIEW CELLS TEMPORARILY
 let zoomLevel=1;
 
+let primaryColor = "#000000";
+let secondaryColor = "#FFFFFF";
+let selectingPrimary = true;
+let ditherMode = false;
+
 // ====================
 // HELPER FUNCTIONS
 // ====================
@@ -90,6 +95,12 @@ function createGrid(size) {
 
                                                //HANDLES DRAG-TO-PAINT FUNCTIONALITY AND LINE PREVIEW
         cell.addEventListener("mouseover",()=>{
+            if (isMouseDown && ditherMode) {
+                const colorToApply = Math.random() < 0.5 ? primaryColor : secondaryColor;
+                cell.style.backgroundColor = colorToApply;
+                return;
+            }
+            
             if(isMouseDown&&currentColor!==null&&!lineMode){
                 cell.style.backgroundColor=currentColor;
             }
@@ -105,6 +116,12 @@ function createGrid(size) {
 
 //HANDLES CELL CLICK EVENTS (COLORING OR LINE MODE)
 function handleCellClick(cell, size) {
+    if (ditherMode) {
+        const colorToApply = Math.random() <0.5 ? primaryColor : secondaryColor;
+        cell.style.backgroundColor = colorToApply;
+        return;
+    }
+
     if(lineMode){
         if(!startCell){
             startCell=cell; //STORE FIRST CLICKED CELL
@@ -223,7 +240,13 @@ function createColorOptions() {
         const option=document.createElement("div");
         option.classList.add("color-option");
         option.style.backgroundColor=color;
-        option.addEventListener("click",()=>currentColor=color);
+        option.addEventListener("click", () => {
+            if (selectingPrimary) {
+                primaryColor = color;
+            } else {
+                secondaryColor = color;
+            }
+        });
         colorPalette.appendChild(option);
     });
 }
@@ -290,6 +313,20 @@ document.addEventListener('keydown',(e)=>{
         clearPreview();
         startCell=null;
     }
+});
+
+document.getElementById("toggle-color-mode").addEventListener("click", () => {
+    selectingPrimary = !selectingPrimary;
+    document.getElementById("toggle-color-mode").innerText = selectingPrimary
+        ? "Select Primary"
+        : "Select Secondary";
+});
+
+document.getElementById('toggle-dither-mode').addEventListener('click', () => {
+    ditherMode = !ditherMode;
+    document.getElementById("toggle-dither-mode").innerText = ditherMode
+        ? "Dither Mode: ON"
+        : "Dither Mode: OFF";
 });
 
 // ====================
