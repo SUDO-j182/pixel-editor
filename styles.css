@@ -60,7 +60,9 @@
   .drawing-grid-container {
       display: grid;
       justify-content: center;
+      align-content: start;
       margin: 0 auto;
+      min-height: 20px;
   }
   
   .grid-cell {
